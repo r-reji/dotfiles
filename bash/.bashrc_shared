@@ -1,0 +1,71 @@
+# ===================
+# History
+# ===================
+HISTCONTROL=ignoreboth
+shopt -s histappend
+HISTSIZE=100000
+HISTFILESIZE=100000
+HISTTIMEFORMAT="%F %T "
+
+# ===================
+# Shell Options
+# ===================
+# Check the window size after each command
+shopt -s checkwinsize
+# Allow ** to recursively match all directories
+shopt -s globstar
+
+# Make less more friendly for non-text input files
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# ===================
+# Colors & Aliases
+# ===================
+# Enable color support of ls and basic grep
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# ===================
+# Autocompletion
+# ===================
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# ===================
+# WSL Compatibility
+# ===================
+if grep -qi microsoft /proc/version 2>/dev/null; then
+    export IS_WSL=1
+fi
+
+if [ "$IS_WSL" = "1" ]; then
+    # WSL configs
+    :
+fi
+
+# ===================
+# FZF Integration
+# ===================
+[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash
+[ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.bash
+
+# ===================
+# Keybindings
+# ===================
+# Enable vi mode for the bash command line
+set -o vi
+
+# ===================
+# Starship
+# ===================
+eval "$(starship init bash)"

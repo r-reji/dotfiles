@@ -1,0 +1,34 @@
+# ===================
+# Base shell check
+# ===================
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# ===================
+# Load Configs & Aliases
+# ===================
+
+# Secrets
+if [ -f ~/.secrets ]; then
+    . ~/.secrets
+fi
+
+# Shared Bash Config
+if [ -f ~/.bashrc_shared ]; then
+    . ~/.bashrc_shared
+fi
+
+# Shared Aliases
+if [ -f ~/.bash_aliases_shared ]; then
+    . ~/.bash_aliases_shared
+fi
+
+# Local Aliases (overrides shared aliases if there are any conflicts)
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
