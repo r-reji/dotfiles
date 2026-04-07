@@ -21,11 +21,12 @@ trim_at = "."
 disabled = false
 
 [character]
-success_symbol = "[➜](bold green)"
-error_symbol = "[✗](bold red)"
+success_symbol = "[➜ ](bold green)"
+error_symbol = "[✗ ](bold red)"
+vicmd_symbol = "[ ](bold blue)" # doesn't seem to work with bash, tested with zsh+fish
 
 [directory]
-truncation_length = 5
+truncation_length = 7
 truncation_symbol = '.../'
 truncate_to_repo = true
 style = "bold italic blue"
@@ -41,7 +42,7 @@ style = "bold italic red"
 number_threshold=1
 
 [docker_context]
-symbol = '🐳'
+symbol = ' '
 format = "[$symbol$context]($style) "
 style = "blue bold"
 only_with_files = true
@@ -50,6 +51,7 @@ detect_folders = []
 disabled = false
 
 [aws]
+symbol = '󰅟 '
 format = '[$symbol($profile) ]($style)'
 
 [git_status]
@@ -88,11 +90,11 @@ symbol = ' '
 format = '[ ${symbol}Golang ]($style)'
 
 [java]
-symbol = ' '
+symbol = ' '
 format = '[ ${symbol}Java ($version)]($style)'
 
 [cpp]
-symbol = ' '
+symbol = '󰙲 '
 format = '[ ${symbol}C++ ($version)]($style)'
 
 [palettes.catppuccin_mocha]
