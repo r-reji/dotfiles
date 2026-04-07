@@ -72,15 +72,9 @@ set -o vi
 eval "$(starship init bash)"
 
 # ==============================================================================
-# Auto-start Tmux (require tmux v3.4 + )
+# Auto-start Tmux (Continuum)
 # ==============================================================================
 if [[ $- =~ i ]] && [[ -z "$TMUX" ]]; then
+    # Create or attach to a session named "main".
     tmux new-session -A -s "main"
 fi
-
-# ===================
-# Tmuxifier
-# ===================
-export PATH="$HOME/.tmuxifier/bin:$PATH"
-export TMUXIFIER_LAYOUT_PATH="$HOME/dotfiles/tmux-layouts:$HOME/.tmux-layouts-local"
-eval "$(tmuxifier init -)"

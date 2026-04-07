@@ -31,7 +31,7 @@ sudo apt update && sudo apt upgrade -y
 
 info "Installing core CLI tools..."
 # Added curl, wget, unzip, and build-essential (needed for Pyenv)
-sudo apt install -y curl wget unzip git stow tmux fzf neovim build-essential libssl-dev zlib1g-dev libbz2-dev \
+sudo apt install -y curl wget unzip git stow tmux fzf neovim build-essential tmuxinator libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget llvm libncurses5-dev libncursesw5-dev \
 xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
 
@@ -42,23 +42,6 @@ echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable
 sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
 sudo apt update
 sudo apt install -y eza
-
-# ==============================================================================
-# Tmuxifier
-# ==============================================================================
-info "Setting up Tmuxifier..."
-if [ ! -d "$HOME/.tmuxifier" ]; then
-    git clone https://github.com/jimeh/tmuxifier.git "$HOME/.tmuxifier"
-    success "Tmuxifier installed!"
-else
-    warn "Tmuxifier already installed, skipping..."
-fi
-
-info "Creating directories for Tmuxifier layouts..."
-# Tracked in dotfiles (Generic)
-mkdir -p "$HOME/dotfiles/tmux-layouts"
-# NOT tracked in dotfiles (Work/Local)
-mkdir -p "$HOME/.tmux-layouts-local"
 
 # ==============================================================================
 # Install System Utilities (GNOME Tweaks, Ulauncher)
