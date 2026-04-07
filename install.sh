@@ -66,6 +66,49 @@ else
 fi
 
 # ==============================================================================
+# Install and Configure keyd
+# ==============================================================================
+info "Setting up keyd (Caps Lock to Esc/Ctrl)..."
+
+if ! command -v keyd &> /dev/null; then
+    info "keyd not found. Cloning and building from source..."
+
+    # Move to the temp directory
+    cd /tmp
+
+    # Remove any old cloned folders 
+    rm -rf keyd
+
+    # Clone, build, and install
+    git clone https://github.com/rvaiya/keyd
+    cd keyd
+    make
+    sudo make install
+
+    # Clean up the temp directory
+    cd /tmp
+    rm -rf keyd
+
+    success "keyd compiled and installed!"
+else
+    warn "keyd is already installed, skipping build..."
+fi
+
+info "Linking keyd configuration to /etc/keyd..."
+# Ensure the directory exists
+sudo mkdir -p /etc/keyd
+
+# Create the symlink pointing to your dotfiles repo
+sudo ln -sf "$HOME/dotfiles/keyd-config/default.conf" /etc/keyd/default.conf
+
+info "Enabling and starting the keyd background daemon..."
+# Reload in case the config changed, and ensure the service is enabled on boot
+sudo keyd reload
+sudo systemctl enable --now keyd
+
+success "keyd is fully configured"
+
+# ==============================================================================
 # Install Fonts
 # ==============================================================================
 info "Installing JetBrains Mono Nerd Font..."
