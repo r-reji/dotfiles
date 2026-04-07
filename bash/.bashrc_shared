@@ -14,7 +14,8 @@ HISTTIMEFORMAT="%F %T "
 shopt -s checkwinsize
 # Allow ** to recursively match all directories
 shopt -s globstar
-
+# Disable terminal flow control
+stty -ixon
 # Make less more friendly for non-text input files
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
