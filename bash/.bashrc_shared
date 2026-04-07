@@ -77,3 +77,10 @@ eval "$(starship init bash)"
 if [[ $- =~ i ]] && [[ -z "$TMUX" ]]; then
     tmux new-session -A -s "main"
 fi
+
+# ===================
+# Tmuxifier
+# ===================
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+export TMUXIFIER_LAYOUT_PATH="$HOME/dotfiles/tmux-layouts:$HOME/.tmux-layouts-local"
+eval "$(tmuxifier init -)"

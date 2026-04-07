@@ -44,6 +44,23 @@ sudo apt update
 sudo apt install -y eza
 
 # ==============================================================================
+# Tmuxifier
+# ==============================================================================
+info "Setting up Tmuxifier..."
+if [ ! -d "$HOME/.tmuxifier" ]; then
+    git clone https://github.com/jimeh/tmuxifier.git "$HOME/.tmuxifier"
+    success "Tmuxifier installed!"
+else
+    warn "Tmuxifier already installed, skipping..."
+fi
+
+info "Creating directories for Tmuxifier layouts..."
+# Tracked in dotfiles (Generic)
+mkdir -p "$HOME/dotfiles/tmux-layouts"
+# NOT tracked in dotfiles (Work/Local)
+mkdir -p "$HOME/.tmux-layouts-local"
+
+# ==============================================================================
 # Install System Utilities (GNOME Tweaks, Ulauncher)
 # ==============================================================================
 info "Installing GNOME Tweaks and required packages..."
