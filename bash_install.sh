@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# ===================
+# WIP Bootsrap does not work 100% yet
+# ===================
+
 # Exit immediately if a command exits with a non-zero status
 set -e 
 
