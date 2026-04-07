@@ -40,6 +40,31 @@ sudo apt update
 sudo apt install -y eza
 
 # ==============================================================================
+# Install System Utilities (GNOME Tweaks, Ulauncher)
+# ==============================================================================
+info "Installing GNOME Tweaks and required packages..."
+# Note: Adjust 'apt' if using Fedora/Arch.
+sudo apt update
+sudo apt install -y gnome-tweaks unzip wget
+
+info "Setting up Ulauncher..."
+if ! command -v ulauncher &> /dev/null; then
+    sudo add-apt-repository universe -y
+    sudo add-apt-repository ppa:agornostal/ulauncher -y
+    sudo apt update
+    sudo apt install -y ulauncher
+    success "Ulauncher installed!"
+else
+    warn "Ulauncher is already installed, skipping installation..."
+fi
+
+info "Setting Ulauncher to autostart on login..."
+mkdir -p "$HOME/.config/autostart"
+if [ -f /usr/share/applications/ulauncher.desktop ]; then
+    cp /usr/share/applications/ulauncher.desktop "$HOME/.config/autostart/"
+fi
+
+# ==============================================================================
 # Install Custom Tools (Alacritty, Starship, Pyenv)
 # ==============================================================================
 info "Setting up Alacritty..."

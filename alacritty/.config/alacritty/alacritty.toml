@@ -50,7 +50,6 @@ startup_mode = "Maximized"
 
 [keyboard]
 bindings = [
-  # Map Alt+<> to send Ctrl+W (hex \u0017)
   { key = "Back", mods = "Alt", chars = "\u0017" },
   { key = "Back", mods = "Control", chars = "\u0017" }
 ]
