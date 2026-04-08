@@ -39,3 +39,11 @@ switch_aws() {
         echo "Switched to AWS profile: [$1]"
     fi
 }
+
+# ===================
+# Yaml
+# ===================
+
+validate_yaml() {
+    python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < $1
+}

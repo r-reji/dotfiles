@@ -31,7 +31,7 @@ sudo apt update && sudo apt upgrade -y
 
 info "Installing core CLI tools..."
 # Added curl, wget, unzip, and build-essential (needed for Pyenv)
-sudo apt install -y curl wget unzip git stow tmux fzf neovim build-essential tmuxinator libssl-dev zlib1g-dev libbz2-dev \
+sudo apt install -y curl wget unzip git stow tmux neovim build-essential tmuxinator libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget llvm libncurses5-dev libncursesw5-dev \
 xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
 
@@ -42,6 +42,24 @@ echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable
 sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
 sudo apt update
 sudo apt install -y eza
+
+# ==========================================
+# Install fzf from source
+# ==========================================
+echo "Installing fzf..."
+# Remove apt version if it exists to prevent conflicts
+sudo apt remove -y fzf 
+
+# Only clone and install if the directory doesn't already exist
+if [ ! -d "$HOME/dev/.fzf" ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/dev/.fzf"
+    
+    # Run the installer silently, accepting all defaults (--all) 
+    # This enables fuzzy auto-completion and keybindings
+    "$HOME/dev/.fzf/install" --all
+else
+    echo "fzf is already installed in ~/dev/.fzf. Skipping clone."
+fi
 
 # ==============================================================================
 # Install System Utilities (GNOME Tweaks, Ulauncher)
