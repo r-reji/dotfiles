@@ -146,7 +146,7 @@ info "Linking keyd configuration to /etc/keyd..."
 sudo mkdir -p /etc/keyd
 
 # Create the symlink pointing to your dotfiles repo
-sudo ln -sf "$HOME/dotfiles/keyd-config/default.conf" /etc/keyd/default.conf
+sudo ln -sf "$HOME/dev/personal/dotfiles/keyd-config/default.conf" /etc/keyd/default.conf
 
 info "Enabling and starting the keyd background daemon..."
 # Reload in case the config changed, and ensure the service is enabled on boot
@@ -176,7 +176,7 @@ fi
 # Symlink Dotfiles with GNU Stow
 # ==============================================================================
 info "Stowing dotfiles..."
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$HOME/dev/personal/dotfiles"
 
 if [ -d "$DOTFILES_DIR" ]; then
     cd "$DOTFILES_DIR"
