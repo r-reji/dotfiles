@@ -5,7 +5,6 @@
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias gs='git status'
 alias li='ls -alF'
 alias v='nvim'
 
@@ -13,9 +12,33 @@ alias v='nvim'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# ==============================================================================
+# ===================
+# Git
+# ===================
+
+alias gs='git status'
+
+# gstat() {
+#     local base="${1:-main}"
+
+#     echo "Branch: $(git branch --show-current)"
+#     echo
+
+#     echo "Committed changes vs $base:"
+#     git diff --shortstat "${base}..HEAD"
+
+#     echo
+#     echo "Staged changes:"
+#     git diff --cached --shortstat
+
+#     echo
+#     echo "Unstaged changes:"
+#     git diff --shortstat
+# }
+
+# ===================
 # Tmux
-# ==============================================================================
+# ===================
 tn() {
     tmux new-session -A -s "$1"
 }
