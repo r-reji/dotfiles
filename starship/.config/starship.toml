@@ -1,5 +1,5 @@
 format = """
-\\($username$hostname\\) $aws $directory\ 
+\\[$username$hostname\\] $aws $directory\ 
 $fill\
 $git_branch$git_state$git_status$docker_context$python$golang$cpp$java$cmd_duration$jobs   
 $character
@@ -16,7 +16,7 @@ show_always = true
 
 [hostname]
 ssh_only = false
-format = " on [$hostname](italic bold purple)"
+format = "@[$hostname](italic bold purple)"
 trim_at = "."
 disabled = false
 
