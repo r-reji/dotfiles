@@ -113,6 +113,31 @@ else
 fi
 
 # ==============================================================================
+# GNOME Keybinds
+# ==============================================================================
+echo "Configuring GNOME Desktop settings..."
+
+if command -v gsettings &> /dev/null; then
+    gsettings set org.gnome.mutter dynamic-workspaces false
+    NUM_WORKSPACES=5
+    gsettings set org.gnome.desktop.wm.preferences num-workspaces $NUM_WORKSPACES
+    echo "Unbinding Ubuntu dock app shortcuts and routing to workspaces..."
+
+    for i in {1..9}; do
+        gsettings set org.gnome.shell.keybindings switch-to-application-$i "[]"
+        
+        if [ "$i" -le "$NUM_WORKSPACES" ]; then
+            gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-$i "['<Super>$i']"
+            gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-$i "['<Super><Shift>$i']"
+        fi
+    done
+
+    echo "GNOME workspaces configured"
+else
+    echo "gsettings not found. Skipping GNOME configuration (likely a headless environment)."
+fi
+
+# ==============================================================================
 # Install and Configure keyd
 # ==============================================================================
 info "Setting up keyd (Caps Lock to Esc/Ctrl)..."
