@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    # Strictly searches ~/dev for .git folders
+    selected=$(find "$HOME/dev" -name ".git" -type d -prune 2>/dev/null | sed 's/\/.git$//' | fzf --prompt="🐙 Git Repos > ")
+fi
+
+# ESC -> exit gracefully
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+# Format the folder name to be tmux-safe
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+# Tmux server not running
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s "$selected_name" -c "$selected"
+    exit 0
+fi
+
+# Tmux server alive, session does not exist
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+    tmux new-session -ds "$selected_name" -c "$selected"
+fi
+
+# Tmux server alive, session exists
+if [[ -z $TMUX ]]; then
+    # Detached
+    tmux attach -t "$selected_name"
+else
+    # Attached
+    tmux switch-client -t "$selected_name"
+fi

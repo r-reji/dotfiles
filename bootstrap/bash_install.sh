@@ -43,9 +43,9 @@ sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.lis
 sudo apt update
 sudo apt install -y eza
 
-# ==========================================
-# Install fzf from source
-# ==========================================
+# ==============================================================================
+# File Searchers & Utilities
+# ==============================================================================
 echo "Installing fzf..."
 # Remove apt version if it exists to prevent conflicts
 sudo apt remove -y fzf 
@@ -60,6 +60,20 @@ if [ ! -d "$HOME/dev/.fzf" ]; then
 else
     echo "fzf is already installed in ~/dev/.fzf. Skipping clone."
 fi
+
+echo "Installing fd and bat..."
+sudo apt update
+sudo apt install -y fd-find bat
+
+# Create standard symlinks in ~/.local/bin
+mkdir -p "$HOME/.local/bin"
+ln -sf /usr/bin/fdfind "$HOME/.local/bin/fd"
+ln -sf /usr/bin/batcat "$HOME/.local/bin/bat"
+
+# Symlink the sessionizer script
+echo "Linking tmux-sessionizer..."
+chmod +x $HOME/dev/personal/dotfiles/scripts/tmux-sessionizer
+ln -sf "$HOME/dev/personal/dotfiles/scripts/tmux-sessionizer" "$HOME/.local/bin/tmux-sessionizer"
 
 # ==============================================================================
 # Install System Utilities (GNOME Tweaks, Ulauncher)
