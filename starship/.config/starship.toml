@@ -27,12 +27,12 @@ vicmd_symbol = "[ ](bold blue)" # doesn't seem to work with bash, tested with
 
 [directory]
 truncation_length = 7
-truncation_symbol = '.../'
+truncation_symbol = ".../"
 truncate_to_repo = true
 style = "bold italic blue"
 
 [fill]
-symbol = ' '
+symbol = " "
 
 [cmd_duration]
 min_time = 2000
@@ -42,7 +42,7 @@ style = "bold italic red"
 number_threshold=1
 
 [docker_context]
-symbol = ' '
+symbol = " "
 format = "[$symbol$context]($style) "
 style = "blue bold"
 only_with_files = true
@@ -51,8 +51,8 @@ detect_folders = []
 disabled = false
 
 [aws]
-symbol = '󰅟 '
-format = '[$symbol($profile) ]($style)'
+symbol = "󰅟 "
+format = "[$symbol($profile)]($style) "
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style) )'
@@ -67,7 +67,7 @@ staged = "[${count}+](green)"
 
 [git_state]
 style =	"bold red"
-format = "[$state( $progress_current/$progress_total) ]($style)"
+format = "[$state( $progress_current/$progress_total)]($style) "
 rebase = "rebase"
 merge = "merge"	
 revert = "revert"
@@ -77,25 +77,25 @@ am = "am"
 am_or_rebase = "am/rebase"
 
 [python]
-symbol = ' '
+symbol = " "
 pyenv_version_name = true
-format = '[ ${symbol}Python(\($virtualenv\) )]($style)'
+format = '[ ${symbol}Python\(($virtualenv)\)]($style) '
 style = "bold yellow"
 pyenv_prefix = "venv "
 python_binary = ["./venv/bin/python", "python", "python3", "python2"]
 detect_extensions = ["py"]
 
 [golang]
-symbol = ' '
-format = '[ ${symbol}Golang ]($style)'
+symbol = " "
+format = "[ ${symbol}Golang]($style) "
 
 [java]
-symbol = ' '
-format = '[ ${symbol}Java ($version)]($style)'
+symbol = " "
+format = "[ ${symbol}Java ($version)]($style) "
 
 [cpp]
-symbol = '󰙲 '
-format = '[ ${symbol}C++ ($version)]($style)'
+symbol = "󰙲 "
+format = "[ ${symbol}C++ ($version)]($style) "
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
