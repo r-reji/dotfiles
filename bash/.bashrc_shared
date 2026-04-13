@@ -97,8 +97,14 @@ if [[ $- =~ i ]] && [[ -z "$TMUX" ]]; then
 fi
 
 # ==============================================================================
-# Path & Global Bindings
+# Path + Cleanup
 # ==============================================================================
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
+
+# Keeps the first occurrence of each directory
+# Artifact from nesting bash shells with tmux
+# if [ -n "$PATH" ]; then
+#     export PATH=$(echo "$PATH" | tr ':' '\n' | awk '!x[$0]++' | tr '\n' ':' | sed 's/:$//')
+# fi
