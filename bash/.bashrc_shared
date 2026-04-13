@@ -95,3 +95,10 @@ if [[ $- =~ i ]] && [[ -z "$TMUX" ]]; then
     # Create or attach to a session named "main".
     tmux new-session -A -s "main"
 fi
+
+# ==============================================================================
+# Path & Global Bindings
+# ==============================================================================
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
