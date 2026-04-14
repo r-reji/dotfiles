@@ -70,8 +70,10 @@ export FZF_ALT_C_COMMAND='fdfind --type d --strip-cwd-prefix --hidden --exclude 
 export FZF_CTRL_T_OPTS="--preview 'batcat --style=numbers --color=always --line-range :500 {}' --preview-window=right:60%"
 complete -F _fzf_path_completion cn cr
 
-# Launch tmux from fzf
-bind -x '"\C-f": tmux-sessionizer'
+# Launch tmux from fzf, absolute path as $PATH sometimes gets weird
+if [[ -z "$TMUX" ]]; then
+    bind -x '"\C-f": ~/.local/bin/tmux-sessionizer'
+fi
 
 # ===================
 # Keybindings
