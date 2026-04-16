@@ -1,6 +1,6 @@
-===================
+#===================
 # ADD TO START OF LOCAL .bashrc
-===================
+#===================
 # ===================
 # Base shell check
 # ===================
@@ -35,3 +35,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# ===================
+# Tmux Lite Aliases (copy for ssh)
+# ===================
+alias mytmux="tmux -S /tmp/tmux_rreji -f ~/.tmux.rreji.conf new-session -A -s main"
+alias myattach="tmux -S /tmp/tmux_rreji attach -t main"

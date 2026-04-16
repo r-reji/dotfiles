@@ -82,9 +82,8 @@ fi
 set -o vi
 
 # ==============================================================================
-# Directory Cache Warmer
+# Directory Cache Warmer (for sessionizer)
 # ==============================================================================
-# This makes tmux-sessionizer fast on its first run.
 (fdfind --hidden --type d '^.git$' ~ > /dev/null 2>&1 &)
 
 # ===================

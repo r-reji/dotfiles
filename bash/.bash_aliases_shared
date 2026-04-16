@@ -97,5 +97,5 @@ validate_yaml() {
 # ===================
 # Bash complete
 # ===================
-
+complete -F _fzf_path_completion cn cr
 complete -f cn cr

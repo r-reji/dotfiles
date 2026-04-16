@@ -1,7 +1,7 @@
 format = """
 \\[$username$hostname\\] $aws $directory\ 
 $fill\
-$git_branch$git_state$git_status$docker_context$python$golang$cpp$java$cmd_duration$jobs   
+$git_branch$git_state$git_status$docker_context$python$conda$golang$cpp$java$cmd_duration$jobs   
 $character
 """
 
@@ -79,11 +79,17 @@ am_or_rebase = "am/rebase"
 [python]
 symbol = " "
 pyenv_version_name = true
-format = '[ ${symbol}Python\(($virtualenv)\)]($style) '
+format = '[ ${symbol}Python ${version}(\($virtualenv\))]($style)'
 style = "bold yellow"
-pyenv_prefix = "venv "
+pyenv_prefix = "pyenv:"
 python_binary = ["./venv/bin/python", "python", "python3", "python2"]
 detect_extensions = ["py"]
+
+[conda]
+symbol = ""
+format = '[${symbol}(\($environment\))]($style) '
+style = "bold yellow"
+ignore_base = true
 
 [golang]
 symbol = " "
