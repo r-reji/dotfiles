@@ -68,7 +68,6 @@ export FZF_DEFAULT_COMMAND='fdfind --strip-cwd-prefix --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fdfind --type d --strip-cwd-prefix --hidden --exclude .git'
 export FZF_CTRL_T_OPTS="--preview 'batcat --style=numbers --color=always --line-range :500 {}' --preview-window=right:60%"
-complete -F _fzf_path_completion cn cr
 
 # Launch tmux from fzf, absolute path as $PATH sometimes gets weird
 if [[ -z "$TMUX" ]]; then
@@ -81,9 +80,9 @@ fi
 # Enable vi mode for the bash command line
 set -o vi
 
-# ==============================================================================
+# ===================
 # Directory Cache Warmer (for sessionizer)
-# ==============================================================================
+# ===================
 (fdfind --hidden --type d '^.git$' ~ > /dev/null 2>&1 &)
 
 # ===================
@@ -91,17 +90,17 @@ set -o vi
 # ===================
 eval "$(starship init bash)"
 
-# ==============================================================================
+# ===================
 # Auto-start Tmux (Continuum)
-# ==============================================================================
+# ===================
 if [[ $- =~ i ]] && [[ -z "$TMUX" ]]; then
     # Create or attach to a session named "main".
     tmux new-session -A -s "main"
 fi
 
-# ==============================================================================
+# ===================
 # Path + Cleanup
-# ==============================================================================
+# ===================
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
@@ -111,3 +110,9 @@ fi
 # if [ -n "$PATH" ]; then
 #     export PATH=$(echo "$PATH" | tr ':' '\n' | awk '!x[$0]++' | tr '\n' ':' | sed 's/:$//')
 # fi
+
+# ===================
+# Bash complete
+# ===================
+complete -F _fzf_path_completion cn cr
+complete -f cn cr

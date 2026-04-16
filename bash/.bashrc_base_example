@@ -4,7 +4,6 @@
 # ===================
 # Base shell check
 # ===================
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -14,7 +13,6 @@ esac
 # ===================
 # Load Configs & Aliases
 # ===================
-
 # Secrets
 if [ -f ~/.secrets ]; then
     . ~/.secrets
@@ -34,9 +32,3 @@ fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
-# ===================
-# Tmux Lite Aliases (copy for ssh)
-# ===================
-alias mytmux="tmux -S /tmp/tmux_rreji -f ~/.tmux.rreji.conf new-session -A -s main"
-alias myattach="tmux -S /tmp/tmux_rreji attach -t main"

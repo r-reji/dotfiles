@@ -1,7 +1,6 @@
 # ===================
 # Base Aliases
 # ===================
-
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -14,29 +13,23 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ===================
 # VSCose
 # ===================
-
 alias cn='code -n'
 alias cr='code -r'
 
 # ===================
 # Git
 # ===================
-
 alias gs='git status'
 
 # gstat() {
 #     local base="${1:-main}"
-
 #     echo "Branch: $(git branch --show-current)"
 #     echo
-
 #     echo "Committed changes vs $base:"
 #     git diff --shortstat "${base}..HEAD"
-
 #     echo
 #     echo "Staged changes:"
 #     git diff --cached --shortstat
-
 #     echo
 #     echo "Unstaged changes:"
 #     git diff --shortstat
@@ -58,10 +51,52 @@ prune_tmux() {
     rm -rf ~/.local/share/tmux-resurrect/*
 }
 
+# ==========================================
+# Python Environment Loaders
+# ==========================================
+# Initialize Pyenv
+load_pyenv() {
+    export PYENV_ROOT="$HOME/.pyenv"
+    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    
+    # eval "$(pyenv virtualenv-init -)"
+    
+    echo "Pyenv initialized - (path hijacked)"
+}
+
+# Initialize Miniforge Conda + Mamba
+load_mamba() {
+    # Conda
+    __conda_setup="$('/home/rreji/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/home/rreji/miniforge3/etc/profile.d/conda.sh" ]; then
+            . "/home/rreji/miniforge3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/rreji/miniforge3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+
+    # Mamba
+    export MAMBA_EXE='/home/rreji/miniforge3/bin/mamba';
+    export MAMBA_ROOT_PREFIX='/home/rreji/miniforge3';
+    __mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__mamba_setup"
+    else
+        alias mamba="$MAMBA_EXE"
+    fi
+    unset __mamba_setup
+
+    echo "Miniforge (Conda+Mamba) initialized - (path hijacked)"
+}
+
 # ===================
 # Docker
 # ===================
-
 function clean_docker ()
 {
    docker system prune -a -f
@@ -74,7 +109,6 @@ function clean_docker ()
 # ===================
 # AWS
 # ===================
-
 switch_aws() {
     if [ -z "$1" ]; then
         export AWS_PROFILE=personal
@@ -86,16 +120,18 @@ switch_aws() {
 }
 
 # ===================
-# Yaml
+# Linters
 # ===================
+lint() {
+	black "$1" --line-length=120  && pylint "$1"
+}
 
 validate_yaml() {
     python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' < $1
 }
 
-
 # ===================
-# Bash complete
+# Stuff for ssh + tmux, to copy to server .bashrc
 # ===================
-complete -F _fzf_path_completion cn cr
-complete -f cn cr
+alias mytmux="tmux -S /tmp/tmux_rreji -f ~/.tmux.rreji.conf new-session -A -s main"
+alias myattach="tmux -S /tmp/tmux_rreji attach -t main"
