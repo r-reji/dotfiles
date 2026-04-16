@@ -81,10 +81,11 @@ fi
 # Enable vi mode for the bash command line
 set -o vi
 
-# ===================
-# Path
-# ===================
-export PATH="$HOME/.local/bin:$PATH"
+# ==============================================================================
+# Directory Cache Warmer
+# ==============================================================================
+# This makes tmux-sessionizer fast on its first run.
+(fdfind --hidden --type d '^.git$' ~ > /dev/null 2>&1 &)
 
 # ===================
 # Starship

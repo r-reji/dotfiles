@@ -99,4 +99,4 @@ validate_yaml() {
 # Bash complete
 # ===================
 
-complete -d cn cr
+complete -f cn cr
