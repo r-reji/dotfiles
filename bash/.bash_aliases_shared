@@ -20,6 +20,7 @@ alias cr='code -r'
 # Git
 # ===================
 alias gs='git status'
+alias gc='git checkout'
 
 # gstat() {
 #     local base="${1:-main}"

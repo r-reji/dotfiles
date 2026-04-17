@@ -13,7 +13,7 @@ HISTTIMEFORMAT="%F %T "
 # Check the window size after each command
 shopt -s checkwinsize
 # Allow ** to recursively match all directories
-shopt -s globstar
+# shopt -s globstar
 # Disable terminal flow control
 stty -ixon
 # Make less more friendly for non-text input files
@@ -116,3 +116,9 @@ fi
 # ===================
 complete -F _fzf_path_completion cn cr
 complete -f cn cr
+
+
+# ===================
+# AWS
+# ===================
+export AWS_PROFILE=personal
