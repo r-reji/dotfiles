@@ -86,7 +86,7 @@ python_binary = ["./venv/bin/python", "python", "python3", "python2"]
 detect_extensions = ["py"]
 
 [conda]
-symbol = ""
+symbol = " "
 format = '[${symbol}(\($environment\))]($style) '
 style = "bold yellow"
 ignore_base = true
@@ -100,7 +100,7 @@ symbol = " "
 format = "[ ${symbol}Java ($version)]($style) "
 
 [cpp]
-symbol = "󰙲 "
+symbol = "󰙲  "
 format = "[ ${symbol}C++ ($version)]($style) "
 
 [palettes.catppuccin_mocha]
