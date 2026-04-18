@@ -79,7 +79,7 @@ am_or_rebase = "am/rebase"
 [python]
 symbol = " "
 pyenv_version_name = true
-format = '[ ${symbol}Python ${version}(\($virtualenv\))]($style)'
+format = '[ ${symbol}Python ${version}(\($virtualenv\))]($style) '
 style = "bold yellow"
 pyenv_prefix = "pyenv:"
 python_binary = ["./venv/bin/python", "python", "python3", "python2"]
