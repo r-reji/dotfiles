@@ -133,6 +133,7 @@ echo "Configuring GNOME Desktop settings..."
 
 if command -v gsettings &> /dev/null; then
     gsettings set org.gnome.mutter dynamic-workspaces false
+    gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
     NUM_WORKSPACES=5
     gsettings set org.gnome.desktop.wm.preferences num-workspaces $NUM_WORKSPACES
     echo "Unbinding Ubuntu dock app shortcuts and routing to workspaces..."
@@ -185,6 +186,7 @@ info "Linking keyd configuration to /etc/keyd..."
 sudo mkdir -p /etc/keyd
 
 # Create the symlink pointing to your dotfiles repo
+# NEEDS FIXING, SYMLINKS DON'T WORK, NEED TO MANUALLY COPY
 sudo ln -sf "$HOME/dev/personal/dotfiles/keyd-config/default.conf" /etc/keyd/default.conf
 
 info "Enabling and starting the keyd background daemon..."
