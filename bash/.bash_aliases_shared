@@ -11,10 +11,13 @@ alias v='nvim'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # ===================
-# VSCose
+# Editors
 # ===================
 alias cn='code -n'
 alias cr='code -r'
+alias z='zed'
+alias zn='zed -n'
+alias zr='zed -r'
 
 # ===================
 # Git
@@ -60,9 +63,9 @@ load_pyenv() {
     export PYENV_ROOT="$HOME/.pyenv"
     command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
-    
+
     # eval "$(pyenv virtualenv-init -)"
-    
+
     echo "Pyenv initialized - (path hijacked)"
 }
 

@@ -71,7 +71,7 @@ export FZF_CTRL_T_OPTS="--preview 'batcat --style=numbers --color=always --line-
 
 # Launch tmux from fzf, absolute path as $PATH sometimes gets weird
 if [[ -z "$TMUX" ]]; then
-    bind -x '"\C-f": "tmux-sessionizer"'
+    bind -x '"\C-f": "$HOME/.local/bin/tmux-sessionizer"'
 fi
 
 # ===================
