@@ -55,26 +55,6 @@ if [ "$IS_WSL" = "1" ]; then
 fi
 
 # ===================
-# FZF Integration
-# ===================
-if [ -f ~/.fzf.bash ]; then
-    source ~/.fzf.bash
-fi
-
-[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash
-[ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.bash
-
-export FZF_DEFAULT_COMMAND='fdfind --strip-cwd-prefix --hidden --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fdfind --type d --strip-cwd-prefix --hidden --exclude .git'
-export FZF_CTRL_T_OPTS="--preview 'batcat --style=numbers --color=always --line-range :500 {}' --preview-window=right:60%"
-
-# Launch tmux from fzf, absolute path as $PATH sometimes gets weird
-if [[ -z "$TMUX" ]]; then
-    bind -x '"\C-f": "$HOME/.local/bin/tmux-sessionizer"'
-fi
-
-# ===================
 # Keybindings
 # ===================
 # Enable vi mode for the bash command line
@@ -89,14 +69,6 @@ set -o vi
 # Starship
 # ===================
 eval "$(starship init bash)"
-
-# ===================
-# Auto-start Tmux (Continuum)
-# ===================
-if [[ $- =~ i ]] && [[ -z "$TMUX" ]]; then
-    # Create or attach to a session named "main".
-    tmux new-session -A -s "main"
-fi
 
 # ===================
 # Path + Cleanup
@@ -118,8 +90,35 @@ complete -F _fzf_path_completion cn cr
 complete -f cn cr
 complete gc
 
-
 # ===================
 # AWS
 # ===================
 export AWS_PROFILE=personal
+
+# ===================
+# Auto-start Tmux (Continuum)
+# ===================
+if [[ $- =~ i ]] && [[ -z "$TMUX" ]]; then
+    # Create or attach to a session named "main".
+    tmux new-session -A -s "main"
+fi
+
+# ===================
+# FZF Integration
+# ===================
+if [ -f ~/.fzf.bash ]; then
+    source ~/.fzf.bash
+fi
+
+[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash
+[ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.bash
+
+export FZF_DEFAULT_COMMAND='fdfind --strip-cwd-prefix --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fdfind --type d --strip-cwd-prefix --hidden --exclude .git'
+export FZF_CTRL_T_OPTS="--preview 'batcat --style=numbers --color=always --line-range :500 {}' --preview-window=right:60%"
+
+# Launch tmux from fzf, absolute path as $PATH sometimes gets weird
+if [[ -z "$TMUX" ]]; then
+    bind -x '"\C-f": "$HOME/.local/bin/tmux-sessionizer"'
+fi
