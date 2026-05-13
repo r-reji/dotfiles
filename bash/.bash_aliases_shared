@@ -47,7 +47,19 @@ fi
 # Tmux
 # ===================
 tn() {
+  # Optional: Ensure a session name was provided
+  if [[ -z "$1" ]]; then
+    echo "Usage: tn <session-name>"
+    return 1
+  fi
+  if [[ -z "$TMUX" ]]; then
     tmux new-session -A -s "$1"
+  else
+    if ! tmux has-session -t "$1" 2>/dev/null; then
+      tmux new-session -d -s "$1"
+    fi
+    tmux switch-client -t "$1"
+  fi
 }
 
 ta() {
